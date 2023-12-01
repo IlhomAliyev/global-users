@@ -1,0 +1,13 @@
+@import "./../../../styles/utils/variables";
+
+.AppSelect {
+  @extend %elemStyle;
+
+  padding: 10px 15px;
+  transition: 200ms;
+
+  &:hover {
+    background-color: var(--prime-color);
+    color: white;
+  }
+}

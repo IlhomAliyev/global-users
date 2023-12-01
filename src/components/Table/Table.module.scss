@@ -1,0 +1,31 @@
+@import "./../../styles/utils/variables";
+
+.AppTable {
+  width: 100%;
+  border-radius: 10px;
+
+  thead {
+    border: 2px solid var(--text-color);
+  }
+
+  th,
+  td {
+    background-color: var(--bgc);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+
+    &:hover {
+      box-shadow: none !important;
+    }
+  }
+
+  th {
+    background-color: var(--prime-color);
+    color: white;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+}

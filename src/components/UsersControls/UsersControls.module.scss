@@ -1,0 +1,14 @@
+.UserControls {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+
+  input {
+    flex: 1 1 auto;
+  }
+
+  select {
+    flex: 0 0 20%;
+  }
+}
