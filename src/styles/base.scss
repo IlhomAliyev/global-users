@@ -4,7 +4,11 @@
 body {
   font-family: "Poppins", sans-serif;
   color: var(--text-color);
-  padding: 0 10px;
+  padding: 0 var(--gap);
+}
+
+.App {
+  margin-top: calc(var(--header-height) + var(--gap));
 }
 
 .error-message {

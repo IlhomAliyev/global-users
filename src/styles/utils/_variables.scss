@@ -1,11 +1,12 @@
 :root {
   --prime-color: #1e90ff;
-  --delete-color: #ff5a52;
+  --secondary-color: #ff5a52;
   --placeholder-color: #808080;
-  --secondary-color: #a69c99;
+  // --secondary-color: #a69c99;
   --gap: 10px;
   --border-radius: 10px;
   --blur: 15px;
+  --header-height: 70px;
 }
 
 %elemStyle {
@@ -20,6 +21,11 @@
     border-color: transparent;
     background-color: var(--prime-color);
     color: white;
+  }
+
+  &:active {
+    background-color: var(--secondary-color);
+    scale: 0.97;
   }
 }
 
