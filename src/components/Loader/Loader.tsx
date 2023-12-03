@@ -1,5 +1,17 @@
 import classes from "./Loader.module.scss";
 
-export const Loader = () => {
-  return <div className={classes.Loader}></div>;
+interface ILoaderProps {
+  isLoading: boolean;
+}
+
+export const Loader = ({ isLoading }: ILoaderProps) => {
+  return (
+    <div
+      className={
+        isLoading
+          ? `${classes.Loader} ${classes.Loader_active}`
+          : classes.Loader
+      }
+    ></div>
+  );
 };

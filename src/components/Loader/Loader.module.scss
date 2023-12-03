@@ -1,23 +1,42 @@
 .Loader {
-  margin: 0 auto;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 6px solid var(--prime-color);
-  border-top-color: var(--text-color);
-  animation: rotate 1s infinite linear;
+  --height-of-loader: 5px;
 
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  // translate: -50%, -50%;
+  display: block;
+  width: 98%;
+  height: var(--height-of-loader);
+  border-radius: 30px;
+  background-color: var(--bgc);
+  position: relative;
+
+  margin: 0 auto;
+  margin-bottom: var(--gap);
+
+  &_active {
+    &::before {
+      animation: moving 1s ease-in-out infinite;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    background: var(--prime-color);
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    border-radius: 30px;
+  }
 }
 
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
+@keyframes moving {
+  50% {
+    width: 100%;
   }
+
   100% {
-    transform: rotate(360deg);
+    width: 0;
+    right: 0;
+    left: unset;
   }
 }

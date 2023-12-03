@@ -4,13 +4,19 @@ import { UserControls } from "./components/UsersControls/UsersControls";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 
 const App = () => {
-  const { users } = useTypedSelector((state) => state.userSlice);
+  const { sortedAndSearchedUsers } = useTypedSelector(
+    (state) => state.userSlice
+  );
 
   return (
     <div className="App">
       <AppDecoration />
       <UserControls />
-      {!!users?.length && <Table users={users} />}
+      {sortedAndSearchedUsers?.length ? (
+        <Table users={sortedAndSearchedUsers} />
+      ) : (
+        <h1 className="error-message">Нет пользователей!</h1>
+      )}
     </div>
   );
 };

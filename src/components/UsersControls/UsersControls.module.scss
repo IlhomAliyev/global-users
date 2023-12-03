@@ -4,7 +4,7 @@
   gap: var(--gap);
   margin-bottom: var(--gap);
 
-  input {
+  div:has(input) {
     flex: 1 1 auto;
   }
 

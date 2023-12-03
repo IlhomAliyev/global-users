@@ -10,10 +10,6 @@
     backdrop-filter: blur(var(--blur));
     
     padding: 5px 10px;
-
-    &:hover {
-      box-shadow: none !important;
-    }
   }
 
   th {

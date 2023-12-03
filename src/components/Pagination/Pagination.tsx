@@ -1,19 +1,29 @@
-import React from 'react';
-import { getPagesArray } from '../../../utils/page';
+import { getPagesArray } from "../../utils/pages";
+import classes from "./Pagination.module.scss";
 
-const Pagination = ({ totalPages, page, changePage }) => {
-  let pagesArray = getPagesArray(totalPages);
+interface IPaginationProps {
+  totalPages: number;
+  page: number;
+  changePage: (page: number) => void;
+}
+
+const Pagination = ({ totalPages, page, changePage }: IPaginationProps) => {
+  const pagesArray = getPagesArray(totalPages);
 
   return (
-    <div className="page__wrapper">
+    <div className={classes.Pagination}>
       {pagesArray.map((p) => (
-        <span
-          onClick={(e) => changePage(p)}
-          className={page === p ? 'page page__current' : 'page'}
+        <p
+          onClick={() => changePage(p)}
+          className={
+            page === p
+              ? `${classes.pageItem} ${classes.pageItem_current}`
+              : classes.pageItem
+          }
           key={p}
         >
           {p}
-        </span>
+        </p>
       ))}
     </div>
   );

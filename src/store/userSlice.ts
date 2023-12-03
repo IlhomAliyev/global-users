@@ -1,16 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../models/IUser";
 
-export type ISort = "id" | "name" | "username";
+export type ISort = "id" | "name" | "username" | "";
 
 interface IInitialState {
   users: IUser[];
-  // totalCount: string;
+  sortedAndSearchedUsers: IUser[];
 }
 
 const initialState: IInitialState = {
   users: [],
-  // totalCount: "0",
+  sortedAndSearchedUsers: [],
 };
 
 export const userSlice = createSlice({
@@ -19,26 +19,37 @@ export const userSlice = createSlice({
   reducers: {
     setUsers(state, action: PayloadAction<IUser[]>) {
       state.users = action.payload;
+      state.sortedAndSearchedUsers = action.payload;
     },
-    setSortedUsers(state, { payload: sort }: PayloadAction<ISort>) {
-      state.users = [...state.users].sort((a, b) => {
-        if (typeof a[sort] === "number" && typeof b[sort] === "number") {
-          return a[sort] - b[sort];
-        } else {
-          return a[sort].toString().localeCompare(b[sort].toString());
-        }
-      });
+    getSortedUsers(state, { payload: sort }: PayloadAction<ISort>) {
+      if (sort) {
+        state.sortedAndSearchedUsers = [...state.users].sort(
+          (a: IUser, b: IUser) => {
+            const aValue = a[sort] as string | number;
+            const bValue = b[sort] as string | number;
+
+            if (typeof aValue === "number" && typeof bValue === "number") {
+              return aValue - bValue;
+            } else {
+              return aValue.toString().localeCompare(bValue.toString());
+            }
+          }
+        );
+      } else {
+        state.sortedAndSearchedUsers = state.users;
+      }
     },
-    setSearchedUsers(state, { payload: searchQuery }: PayloadAction<string>) {
-      state.users = [...state.users].filter((user) =>
-        user.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+    getSearchedUsers(state, { payload: searchQuery }: PayloadAction<string>) {
+      if (searchQuery) {
+        state.sortedAndSearchedUsers = [...state.users].filter((user) =>
+          user.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      } else {
+        state.sortedAndSearchedUsers = state.users;
+      }
     },
-    // setTotalCount(state, action: PayloadAction<string>) {
-    //   state.totalCount = action.payload;
-    // },
   },
 });
 
-export const { setUsers, setSortedUsers, setSearchedUsers } = userSlice.actions;
+export const { setUsers, getSortedUsers, getSearchedUsers } = userSlice.actions;
 export default userSlice.reducer;

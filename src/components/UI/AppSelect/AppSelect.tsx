@@ -20,8 +20,7 @@ export const AppSelect = ({
   onChange,
 }: IAppSelectProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = e.target.value;
-    onChange(selectedValue);
+    onChange(e.target.value);
   };
 
   return (

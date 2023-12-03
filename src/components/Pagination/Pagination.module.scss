@@ -1,0 +1,36 @@
+.Pagination {
+  margin: var(--gap) 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-self: center;
+  gap: 5px;
+}
+
+.pageItem {
+  --item-size: 40px;
+  cursor: pointer;
+  display: block;
+
+  height: var(--item-size);
+  flex: 0 0 var(--item-size);
+  text-align: center;
+  line-height: var(--item-size);
+
+  background-color: var(--bgc);
+  border-radius: 50%;
+  border-radius: var(--border-radius);
+  transition: 200ms;
+
+  &:hover {
+    font-weight: bold;
+    background-color: var(--prime-color);
+  }
+
+  &_current {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: var(--prime-color);
+  }
+}
