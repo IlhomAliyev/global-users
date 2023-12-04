@@ -18,7 +18,7 @@ export const usersApi = createApi({
   endpoints: (builder) => ({
     getAllUsers: builder.query<IGetAllUsersData, IGetAllUsersPayload>({
       query: ({ limit, page }) => `/users/?_limit=${limit}&_page=${page}`,
-      transformResponse: (response, meta) => {
+      transformResponse: (response: IUser[], meta) => {
         const totalCount = Number(meta?.response?.headers.get("X-Total-Count"));
         return { response, totalCount };
       },
@@ -26,4 +26,4 @@ export const usersApi = createApi({
   }),
 });
 
-export const { useGetAllUsersQuery } = usersApi;
+export const { useLazyGetAllUsersQuery } = usersApi;

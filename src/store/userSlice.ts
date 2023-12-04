@@ -41,8 +41,8 @@ export const userSlice = createSlice({
     },
     getSearchedUsers(state, { payload: searchQuery }: PayloadAction<string>) {
       if (searchQuery) {
-        state.sortedAndSearchedUsers = [...state.users].filter((user) =>
-          user.name.toLowerCase().includes(searchQuery.toLowerCase())
+        state.sortedAndSearchedUsers = [...state.sortedAndSearchedUsers].filter(
+          (user) => user.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
       } else {
         state.sortedAndSearchedUsers = state.users;

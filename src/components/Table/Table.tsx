@@ -20,6 +20,10 @@ export const Table = ({ users }: ITableProps) => {
     );
   };
 
+  if (!users.length) {
+    return <h1 className="error-message">Нет пользователей!</h1>;
+  }
+
   return (
     <table className={classes.AppTable}>
       <thead>

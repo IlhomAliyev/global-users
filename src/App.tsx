@@ -12,11 +12,7 @@ const App = () => {
     <div className="App">
       <AppDecoration />
       <UserControls />
-      {sortedAndSearchedUsers?.length ? (
-        <Table users={sortedAndSearchedUsers} />
-      ) : (
-        <h1 className="error-message">Нет пользователей!</h1>
-      )}
+      <Table users={sortedAndSearchedUsers} />
     </div>
   );
 };

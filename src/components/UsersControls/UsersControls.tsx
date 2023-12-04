@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useGetAllUsersQuery } from "../../store/API/usersApi";
+import { useLazyGetAllUsersQuery } from "../../store/API/usersApi";
 import {
   ISort,
   getSearchedUsers,
@@ -19,7 +19,7 @@ const limitOptions = [
   { value: 3, name: "3" },
   { value: 5, name: "5" },
   { value: 7, name: "7" },
-  { value: "", name: "Показать все" },
+  { value: -1, name: "Показать все" },
 ];
 
 const sortOptions = [
@@ -34,12 +34,18 @@ export const UserControls = () => {
   const [limit, setLimit] = useState("3");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  console.log('totalPages: ', totalPages)
 
   const dispatch = useDispatch();
   const { sortedAndSearchedUsers } = useTypedSelector(
     (state) => state.userSlice
   );
-  const { data, isLoading, isError } = useGetAllUsersQuery({ limit, page });
+  const [fetchTrigget, { data, isLoading, isError }] =
+    useLazyGetAllUsersQuery();
+
+  useEffect(() => {
+    fetchTrigget({ limit, page });
+  }, [limit, page, fetchTrigget]);
 
   useEffect(() => {
     if (data) {
@@ -61,7 +67,7 @@ export const UserControls = () => {
       <Loader isLoading={isLoading} />
       <div className={classes.UserControls}>
         <AppInput
-          type="search"
+          type="text"
           placeholder="Поиск по имени..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -80,11 +86,9 @@ export const UserControls = () => {
           options={limitOptions}
         />
       </div>
-      <Pagination
-        page={page}
-        changePage={(page: number) => setPage(page)}
-        totalPages={totalPages}
-      />
+      {totalPages !== 0 && (
+        <Pagination page={page} changePage={setPage} totalPages={totalPages} />
+      )}
       {isError && (
         <h2 className="error-message">Не удалось загрузить пользователей :(</h2>
       )}
