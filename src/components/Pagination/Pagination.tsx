@@ -1,4 +1,5 @@
 import { getPagesArray } from "../../utils/pages";
+import { AppButton } from "../UI/AppButton/AppButton";
 import classes from "./Pagination.module.scss";
 
 interface IPaginationProps {
@@ -9,37 +10,26 @@ interface IPaginationProps {
 
 const Pagination = ({ totalPages, page, changePage }: IPaginationProps) => {
   const pagesArray = getPagesArray(totalPages);
-  console.log("pagesArray: ", pagesArray);
-  console.log("page: ", page);
   const lastPage = pagesArray[pagesArray.length - 1];
 
   return (
     <div className={classes.Pagination}>
-      <p
-        className={classes.pageItem}
+      <AppButton
+        buttonLabel="<"
         onClick={() => changePage(page === 1 ? page : page - 1)}
-      >
-        &#60;
-      </p>
+      />
       {pagesArray.map((p) => (
-        <p
-          onClick={() => changePage(p)}
-          className={
-            page === p
-              ? `${classes.pageItem} ${classes.pageItem_current}`
-              : classes.pageItem
-          }
+        <AppButton
           key={p}
-        >
-          {p}
-        </p>
+          onClick={() => changePage(p)}
+          buttonLabel={String(p)}
+          className={page === p ? `${classes.currentPage}` : ""}
+        />
       ))}
-      <p
-        className={classes.pageItem}
+      <AppButton
+        buttonLabel=">"
         onClick={() => changePage(page === lastPage ? page : page + 1)}
-      >
-        &#62;
-      </p>
+      />
     </div>
   );
 };

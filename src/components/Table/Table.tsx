@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
-import { IAddress, ICompany, IUser } from "../../models/IUser";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { IAddress, ICompany } from "../../models/IUser";
 import classes from "./Table.module.scss";
 
-interface ITableProps {
-  users: IUser[];
-}
+export const Table = () => {
+  const { sortedAndSearchedUsers } = useTypedSelector(
+    (state) => state.userSlice
+  );
 
-export const Table = ({ users }: ITableProps) => {
   //? рекурсивная функция для рендера многослойного объекта
   const renderObjectInfo = (objectInfo: IAddress | ICompany): ReactNode => {
     return (
@@ -20,7 +21,7 @@ export const Table = ({ users }: ITableProps) => {
     );
   };
 
-  if (!users.length) {
+  if (!sortedAndSearchedUsers.length) {
     return <h1 className="error-message">Нет пользователей!</h1>;
   }
 
@@ -28,14 +29,14 @@ export const Table = ({ users }: ITableProps) => {
     <table className={classes.AppTable}>
       <thead>
         <tr>
-          {Object.keys(users[0]).map((head) => (
+          {Object.keys(sortedAndSearchedUsers[0]).map((head) => (
             //? рендер названия каждого столбца
-            <th key={head}>{head[0].toUpperCase() + head.slice(1)}</th>
+            <th key={head}>{head}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {users.map((user) => (
+        {sortedAndSearchedUsers.map((user) => (
           //? рендер каждой строки (пользователя)
           <tr key={user.id}>
             {Object.values(user).map((info) => {

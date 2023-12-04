@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useFilterUsers } from "../../hooks/useFilterUsers";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useLazyGetAllUsersQuery } from "../../store/API/usersApi";
 import {
   ISort,
-  getSearchedUsers,
-  getSortedUsers,
+  setSortedAndSearchedUsers,
   setUsers,
 } from "../../store/userSlice";
 import { getPageCount } from "../../utils/pages";
@@ -19,7 +19,7 @@ const limitOptions = [
   { value: 3, name: "3" },
   { value: 5, name: "5" },
   { value: 7, name: "7" },
-  { value: -1, name: "Показать все" },
+  { value: "", name: "Показать все" },
 ];
 
 const sortOptions = [
@@ -29,23 +29,27 @@ const sortOptions = [
 ];
 
 export const UserControls = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sort, setSort] = useState("");
+  const [filter, setFilter] = useState({ sort: "", searchQuery: "" });
   const [limit, setLimit] = useState("3");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  console.log('totalPages: ', totalPages)
 
   const dispatch = useDispatch();
-  const { sortedAndSearchedUsers } = useTypedSelector(
-    (state) => state.userSlice
-  );
-  const [fetchTrigget, { data, isLoading, isError }] =
+
+  const { users } = useTypedSelector((state) => state.userSlice);
+
+  const [fetchTrigger, { data, isLoading, isError }] =
     useLazyGetAllUsersQuery();
 
+  const filteredUsers = useFilterUsers(
+    users,
+    filter.sort as ISort,
+    filter.searchQuery
+  );
+
   useEffect(() => {
-    fetchTrigget({ limit, page });
-  }, [limit, page, fetchTrigget]);
+    fetchTrigger({ limit, page });
+  }, [limit, page, fetchTrigger]);
 
   useEffect(() => {
     if (data) {
@@ -55,12 +59,8 @@ export const UserControls = () => {
   }, [data, limit, dispatch]);
 
   useEffect(() => {
-    dispatch(getSortedUsers(sort as ISort));
-  }, [sort, dispatch]);
-
-  useEffect(() => {
-    dispatch(getSearchedUsers(searchQuery));
-  }, [searchQuery, dispatch]);
+    dispatch(setSortedAndSearchedUsers(filteredUsers));
+  }, [filteredUsers, dispatch]);
 
   return (
     <>
@@ -69,13 +69,17 @@ export const UserControls = () => {
         <AppInput
           type="text"
           placeholder="Поиск по имени..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          resultCount={sortedAndSearchedUsers.length}
+          value={filter.searchQuery}
+          onChange={(e) =>
+            setFilter({ ...filter, searchQuery: e.target.value })
+          }
+          resultCount={filteredUsers.length}
         />
         <AppSelect
-          value={sort}
-          onChange={(selectedSort) => setSort(selectedSort)}
+          value={filter.sort}
+          onChange={(selectedSort) =>
+            setFilter({ ...filter, sort: selectedSort })
+          }
           defaultValue="Сортировка по ..."
           options={sortOptions}
         />
@@ -86,7 +90,7 @@ export const UserControls = () => {
           options={limitOptions}
         />
       </div>
-      {totalPages !== 0 && (
+      {totalPages > 1 && (
         <Pagination page={page} changePage={setPage} totalPages={totalPages} />
       )}
       {isError && (

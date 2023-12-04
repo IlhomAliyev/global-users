@@ -25,6 +25,7 @@
   &:active {
     background-color: var(--secondary-color);
     scale: 0.97;
+    transition: 100ms;
   }
 }
 

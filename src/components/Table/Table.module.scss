@@ -2,32 +2,6 @@
   width: 100%;
   border-radius: 10px;
 
-  th,
-  td {
-    background-color: var(--bgc);
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(var(--blur));
-
-    padding: 5px 10px;
-  }
-
-  th {
-    background-color: var(--prime-color);
-    color: white;
-  }
-
-  ul {
-    padding-left: 20px;
-  }
-
-  th:first-child {
-    border-radius: var(--border-radius) 0 0 0;
-  }
-
-  th:last-child {
-    border-radius: 0 var(--border-radius) 0 0;
-  }
-
   tr:last-child {
     td:first-child {
       border-radius: 0 0 0 var(--border-radius);
@@ -36,5 +10,52 @@
     td:last-child {
       border-radius: 0 0 var(--border-radius) 0;
     }
+  }
+
+  th {
+    background-color: var(--prime-color);
+    color: white;
+    text-transform: capitalize;
+    padding: 5px 10px;
+
+    &:first-child {
+      border-radius: var(--border-radius) 0 0 0;
+      text-transform: uppercase;
+    }
+
+    &:last-child {
+      border-radius: 0 var(--border-radius) 0 0;
+    }
+  }
+
+  td {
+    background-color: var(--bgc);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(var(--blur));
+    padding: 5px;
+
+    &:first-child {
+      text-align: center;
+    }
+  }
+
+  th {
+    background-color: var(--prime-color);
+    border: 1px solid var(--border-color);
+    text-transform: capitalize;
+    color: white;
+
+    &:first-child {
+      border-radius: var(--border-radius) 0 0 0;
+      text-transform: uppercase;
+    }
+
+    &:last-child {
+      border-radius: 0 var(--border-radius) 0 0;
+    }
+  }
+
+  ul {
+    padding-left: 20px;
   }
 }

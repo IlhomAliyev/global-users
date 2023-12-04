@@ -17,7 +17,13 @@ export const usersApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (builder) => ({
     getAllUsers: builder.query<IGetAllUsersData, IGetAllUsersPayload>({
-      query: ({ limit, page }) => `/users/?_limit=${limit}&_page=${page}`,
+      query: ({ limit, page }) => ({
+        url: `/users/`,
+        params: {
+          _limit: limit,
+          _page: page,
+        },
+      }),
       transformResponse: (response: IUser[], meta) => {
         const totalCount = Number(meta?.response?.headers.get("X-Total-Count"));
         return { response, totalCount };

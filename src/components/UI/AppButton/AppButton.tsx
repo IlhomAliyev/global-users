@@ -9,10 +9,15 @@ interface IAppButtonProps
 export const AppButton = ({
   type = "button",
   buttonLabel,
+  className,
   onClick,
 }: IAppButtonProps) => {
   return (
-    <button onClick={onClick} type={type} className={classes.AppButton}>
+    <button
+      onClick={onClick}
+      type={type}
+      className={`${classes.AppButton} ${className}`}
+    >
       {buttonLabel}
     </button>
   );

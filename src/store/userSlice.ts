@@ -17,39 +17,14 @@ export const userSlice = createSlice({
   name: "userSlice",
   initialState,
   reducers: {
-    setUsers(state, action: PayloadAction<IUser[]>) {
-      state.users = action.payload;
-      state.sortedAndSearchedUsers = action.payload;
+    setUsers(state, { payload }: PayloadAction<IUser[]>) {
+      state.users = payload;
     },
-    getSortedUsers(state, { payload: sort }: PayloadAction<ISort>) {
-      if (sort) {
-        state.sortedAndSearchedUsers = [...state.users].sort(
-          (a: IUser, b: IUser) => {
-            const aValue = a[sort] as string | number;
-            const bValue = b[sort] as string | number;
-
-            if (typeof aValue === "number" && typeof bValue === "number") {
-              return aValue - bValue;
-            } else {
-              return aValue.toString().localeCompare(bValue.toString());
-            }
-          }
-        );
-      } else {
-        state.sortedAndSearchedUsers = state.users;
-      }
-    },
-    getSearchedUsers(state, { payload: searchQuery }: PayloadAction<string>) {
-      if (searchQuery) {
-        state.sortedAndSearchedUsers = [...state.sortedAndSearchedUsers].filter(
-          (user) => user.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      } else {
-        state.sortedAndSearchedUsers = state.users;
-      }
+    setSortedAndSearchedUsers(state, { payload }: PayloadAction<IUser[]>) {
+      state.sortedAndSearchedUsers = payload;
     },
   },
 });
 
-export const { setUsers, getSortedUsers, getSearchedUsers } = userSlice.actions;
+export const { setUsers, setSortedAndSearchedUsers } = userSlice.actions;
 export default userSlice.reducer;
