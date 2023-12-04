@@ -19,7 +19,7 @@ const limitOptions = [
   { value: 3, name: "3" },
   { value: 5, name: "5" },
   { value: 7, name: "7" },
-  { value: "", name: "Показать все" },
+  { value: 10, name: "Показать все" },
 ];
 
 const sortOptions = [
