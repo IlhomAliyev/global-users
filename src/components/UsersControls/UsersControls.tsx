@@ -62,6 +62,8 @@ export const UserControls = () => {
     dispatch(setSortedAndSearchedUsers(filteredUsers));
   }, [filteredUsers, dispatch]);
 
+  console.log("UserControls RENDER");
+
   return (
     <>
       <Loader isLoading={isLoading} />

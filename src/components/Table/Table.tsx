@@ -25,6 +25,8 @@ export const Table = () => {
     return <h1 className="error-message">Нет пользователей!</h1>;
   }
 
+  console.log("Table RENDER");
+
   return (
     <table className={classes.AppTable}>
       <thead>

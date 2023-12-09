@@ -18,6 +18,8 @@ export const AppDecoration = () => {
     localStorage.setItem("appTheme", theme);
   }, [theme]);
 
+  console.log("AppDecoration RENDER");
+
   return (
     <>
       <header className={classes.Header}>
