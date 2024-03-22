@@ -1,0 +1,42 @@
+@import "./../../styles/utils/variables";
+
+.inputWrapper {
+  position: relative;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.AppInput {
+  @extend %elemStyle;
+
+  width: 100%;
+  padding: 10px 15px;
+  transition: 200ms;
+
+  &:hover {
+    color: white;
+
+    &::placeholder {
+      color: white;
+    }
+  }
+
+  &:active {
+    background-color: var(--prime-color);
+    scale: 1;
+  }
+
+  &::placeholder {
+    color: var(--placeholder-color);
+  }
+}
+
+.resultCount {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  translate: 0 -50%;
+  font-weight: bold;
+}
