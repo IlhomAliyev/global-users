@@ -1,13 +1,13 @@
-import { AppDecoration } from "./components/AppDecoration/AppDecoration";
-import { Table } from "./components/Table/Table";
-import { UserControls } from "./components/UsersControls/UsersControls";
+import { AppDecoration } from "./modules/AppDecoration/AppDecoration";
+import { UserControls } from "./modules/UsersControls/UsersControls";
+import { UsersTable } from "./modules/UsersTable/UsersTable";
 
 const App = () => {
   return (
     <div className="App">
       <AppDecoration />
       <UserControls />
-      <Table />
+      <UsersTable />
     </div>
   );
 };

@@ -1,8 +1,0 @@
-@import "./../../../styles/utils/variables";
-
-.AppButton {
-  @extend %elemStyle;
-
-  cursor: pointer;
-  padding: 10px 15px;
-}
