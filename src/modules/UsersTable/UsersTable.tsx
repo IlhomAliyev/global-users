@@ -10,8 +10,6 @@ import { setTotalPages } from "../../store/slices/usersSlice";
 import { getPageCount } from "../../utils/getPageParams";
 
 export const UsersTable = () => {
-  console.log("UsersTable Render");
-
   const dispatch = useDispatch();
 
   const { touchedUsers } = useTypedSelector((state) => state.dataSlice);
