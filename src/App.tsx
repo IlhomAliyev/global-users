@@ -3,8 +3,6 @@ import { UserControls } from "./modules/UsersControls/UsersControls";
 import { UsersTable } from "./modules/UsersTable/UsersTable";
 
 const App = () => {
-  console.log("App Render");
-
   return (
     <div className="App">
       <AppDecoration />

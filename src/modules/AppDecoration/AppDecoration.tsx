@@ -5,8 +5,6 @@ import darkBg from "/images/bg-dark.jpg";
 import lightBg from "/images/bg-light.jpg";
 
 export const AppDecoration = () => {
-  // console.log("AppDecoration Render")
-
   const [theme, setTheme] = useState(
     localStorage.getItem("appTheme") || "light"
   );
