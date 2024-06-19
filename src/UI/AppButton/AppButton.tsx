@@ -11,12 +11,14 @@ export const AppButton = ({
   buttonLabel,
   className,
   onClick,
+  ...props
 }: IAppButtonProps) => {
   return (
     <button
       onClick={onClick}
       type={type}
       className={`${styles.AppButton} ${className}`}
+      {...props}
     >
       {buttonLabel}
     </button>

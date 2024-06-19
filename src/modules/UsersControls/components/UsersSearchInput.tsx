@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppInput } from "../../../UI/AppInput/AppInput";
-import { useSearchUsers } from "../../../hooks/useSearchUsers";
+import { useSearchedUsers } from "../../../hooks/useSearchedUsers";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { setTouchedUsers } from "../../../store/slices/dataSlice";
 
@@ -12,18 +12,23 @@ export const UsersSearchInput = () => {
 
   const { users } = useTypedSelector((state) => state.dataSlice);
 
-  const searchedUsers = useSearchUsers(users, searchQuery);
+  const searchedUsers = useSearchedUsers(users, searchQuery);
 
   useEffect(() => {
     dispatch(setTouchedUsers(searchedUsers));
-  }, [searchQuery]);
+  }, [dispatch, searchQuery, searchedUsers]);
+
+  const handleSearchInput = (value: string) => {
+    setSearchQuery(value);
+    dispatch(setTouchedUsers(searchedUsers));
+  };
 
   return (
     <AppInput
       type="text"
       placeholder="Поиск по имени..."
       value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
+      onChange={(e) => handleSearchInput(e.target.value)}
       resultCount={users.length}
     />
   );

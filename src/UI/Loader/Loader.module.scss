@@ -7,11 +7,17 @@
   border-radius: 30px;
   background-color: var(--bgc);
   position: relative;
+  overflow: hidden;
 
-  margin: 0 auto;
-  margin-bottom: var(--gap);
+  margin: 0 auto var(--gap);
+
+  visibility: hidden;
+  opacity: 0;
 
   &_active {
+    visibility: visible;
+    opacity: 1;
+
     &::before {
       animation: moving 1s ease-in-out infinite;
     }
@@ -26,6 +32,7 @@
     width: 0%;
     height: 100%;
     border-radius: 30px;
+    pointer-events: none;
   }
 }
 
@@ -35,8 +42,9 @@
   }
 
   100% {
-    width: 0;
-    right: 0;
-    left: unset;
+    width: 0%;
+    // right: 0;
+    // left: unset;
+    translate: 100% 0;
   }
 }

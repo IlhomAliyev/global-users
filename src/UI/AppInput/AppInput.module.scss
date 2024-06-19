@@ -1,35 +1,35 @@
-@import "./../../styles/utils/variables";
-
 .inputWrapper {
   position: relative;
-
-  &:hover {
-    color: white;
-  }
 }
 
 .AppInput {
-  @extend %elemStyle;
+  background-color: var(--bgc);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(--blur);
+  color: var(--text-color);
+  transition: 200ms;
 
   width: 100%;
   padding: 10px 15px;
   transition: 200ms;
 
   &:hover {
-    color: white;
+    color: var(--text-color);
 
     &::placeholder {
-      color: white;
+      color: var(--text-color);
     }
   }
 
-  &:active {
-    background-color: var(--prime-color);
-    scale: 1;
+  &:focus {
+    &::placeholder {
+      color: var(--text-color);
+    }
   }
 
   &::placeholder {
-    color: var(--placeholder-color);
+    transition: 200ms;
   }
 }
 
@@ -39,4 +39,5 @@
   right: 10px;
   translate: 0 -50%;
   font-weight: bold;
+  color: var(--text-color);
 }

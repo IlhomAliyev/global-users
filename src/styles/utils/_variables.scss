@@ -16,16 +16,22 @@
   color: var(--text-color);
   transition: 200ms;
 
-  &:hover {
-    border-color: transparent;
-    background-color: var(--prime-color);
-    color: white;
+  &:enabled {
+    &:hover {
+      border-color: transparent;
+      background-color: var(--prime-color);
+      color: white;
+    }
+
+    &:active {
+      background-color: var(--secondary-color);
+      scale: 0.97;
+      transition: 100ms;
+    }
   }
 
-  &:active {
-    background-color: var(--secondary-color);
-    scale: 0.97;
-    transition: 100ms;
+  &:disabled {
+    opacity: 0.5;
   }
 }
 
